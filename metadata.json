@@ -1,0 +1,6 @@
+{
+  "name": "Interview Buddy",
+  "description": "A streaming Gradio app for interview practice, voice prompts, resume feedback, job discovery, and memory-aware coaching with Hugging Face.",
+  "requestFramePermissions": [],
+  "prompt": ""
+}

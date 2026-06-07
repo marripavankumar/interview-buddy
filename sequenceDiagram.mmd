@@ -1,0 +1,24 @@
+sequenceDiagram
+    participant User
+    participant UI as Gradio UI
+    participant Coach as InterviewFlowCoach
+    participant HF as Hugging Face
+    participant WH as Whisper
+    participant Mem as Local Memory
+
+    User->>UI: Upload resume / enter prompt / voice clip
+    UI->>Coach: Call resume or chat handler
+    Coach->>Mem: Load session context
+    alt Voice prompt submitted
+        Coach->>WH: Transcribe audio
+        WH-->>Coach: Transcript text
+    end
+    alt HF token available
+        Coach->>HF: Stream completion
+        HF-->>Coach: Partial chunks
+    else Fallback path
+        Coach-->>UI: Stream dummy response
+    end
+    Coach->>Mem: Save updated session
+    Coach-->>UI: Final streamed output
+    UI-->>User: Render response and ATS score
